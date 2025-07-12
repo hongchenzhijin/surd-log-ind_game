@@ -18,7 +18,7 @@ model = None
 if AI_AVAILABLE:
     try:
         # Get API key from environment variable (more secure)
-        api_key = "AIzaSyCIFc2MEBC0ezuFWD132neqjBo26EwBzvw"
+        api_key = "dont use mine"
         if api_key:
             configure(api_key=api_key)
             model = GenerativeModel('gemini-2.5-flash-lite-preview-06-17')
