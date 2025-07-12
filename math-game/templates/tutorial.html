@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial: {{ topic.title() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Stop 1: {{ topic.title() }} Tutorial</h1>
+        {% if video_id %}
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video_id }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        {% else %}
+            <p>Tutorial for this topic is not yet available.</p>
+        {% endif %}
+        <form action="{{ url_for('complete_tutorial', topic_name=topic) }}" method="post" style="margin-top: 20px;">
+            <button type="submit">Mark Tutorial as Complete</button>
+        </form>
+        <a href="{{ url_for('topic_map', topic_name=topic) }}">Back to Map</a>
+    </div>
+</body>
+</html>

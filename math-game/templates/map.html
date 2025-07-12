@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ topic.title() }} Map</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ topic.title() }} Learning Map</h1>
+        <div class="map-container">
+            <img src="{{ url_for('static', filename='images/map.avif') }}" alt="Learning Map">
+            <div class="stops">
+                {% for i in range(1, 8) %}
+                    <a href="{{ url_for('stop', topic_name=topic, stop_id=i) if i <= progress + 1 else '#' }}"
+                       class="stop stop-{{ i }} {% if i > progress + 1 %}disabled{% endif %}"
+                       data-stop="{{ i }}"
+                       {% if i <= progress %}data-completed="true"{% endif %}
+                       {% if i == progress + 1 %}data-current="true"{% endif %}
+                    >
+                        {% if i == 1 %}Tutorial{% elif 2 <= i <= 6 %}Quiz {{ i-1 }}{% elif i == 7 %}Final Exam{% else %}{{ i }}{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+            <div id="tooltip" style="display:none; position:absolute; background:#333; color:#fff; padding:5px 10px; border-radius:5px; font-size:0.9em;"></div>
+        </div>
+        <a href="{{ url_for('index') }}">Back to Topics</a>
+    </div>
+    <script>
+    // Tooltip and highlight interactivity for stops
+    document.addEventListener('DOMContentLoaded', function() {
+        const stops = document.querySelectorAll('.stop');
+        const tooltip = document.getElementById('tooltip');
+        const stopDescriptions = [
+            '',
+            'Tutorial',
+            'Quiz 1',
+            'Quiz 2',
+            'Quiz 3',
+            'Quiz 4',
+            'Quiz 5',
+            'Final Exam'
+        ];
+        stops.forEach(stop => {
+            stop.addEventListener('mouseenter', function(e) {
+                const stopNum = parseInt(stop.getAttribute('data-stop'));
+                tooltip.textContent = stopDescriptions[stopNum] || `Stop ${stopNum}`;
+                tooltip.style.display = 'block';
+                const rect = stop.getBoundingClientRect();
+                tooltip.style.left = (rect.left + window.scrollX + rect.width/2) + 'px';
+                tooltip.style.top = (rect.top + window.scrollY - 35) + 'px';
+            });
+            stop.addEventListener('mouseleave', function() {
+                tooltip.style.display = 'none';
+            });
+        });
+    });
+    </script>
+</body>
+</html>

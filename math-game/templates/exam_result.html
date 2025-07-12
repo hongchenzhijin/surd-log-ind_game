@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Final Exam Result: {{ topic.title() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Final Exam Result</h1>
+        <p>Your score: <strong>{{ score }}</strong></p>
+        {% if correct == total %}
+            <p>Excellent! You answered all questions correctly!</p>
+        {% elif correct >= total // 2 %}
+            <p>Good job! Review any mistakes and try again if you wish.</p>
+        {% else %}
+            <p>Keep practicing! You can retake the exam to improve your score.</p>
+        {% endif %}
+        <a href="{{ url_for('topic_map', topic_name=topic) }}">Back to Map</a>
+    </div>
+</body>
+</html> 

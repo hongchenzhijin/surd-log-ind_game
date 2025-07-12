@@ -1,0 +1,21 @@
+    <div class="container">
+        <h1>Stop 7: {{ topic.title() }} Final Exam</h1>
+        <p>This is the final exam. Good luck!</p>
+        <form action="{{ url_for('submit_exam', topic_name=topic) }}" method="post">
+            {% for question in exam %}
+                <div class="quiz-question">
+                    <p>Q{{ loop.index }}. {{ question.question }}</p>
+                </div>
+                <div class="quiz-options">
+                    {% set qidx = loop.index0 %}
+                    {% for option in question.options %}
+                        <label>
+                            <input type="radio" name="answer{{ qidx }}" value="{{ option }}" required> {{ option }}
+                        </label><br>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <button type="submit">Submit Exam</button>
+        </form>
+        <a href="{{ url_for('topic_map', topic_name=topic) }}">Back to Map</a>
+    </div> 

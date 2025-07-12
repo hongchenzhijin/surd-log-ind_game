@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% if result == 'correct' %}
+            <h1>Correct!</h1>
+            <p>You have unlocked the next stop.</p>
+        {% else %}
+            <h1>Incorrect.</h1>
+            <p>Please try again.</p>
+        {% endif %}
+        <a href="{{ url_for('topic_map', topic_name=topic) }}">Continue your journey</a>
+    </div>
+</body>
+</html>

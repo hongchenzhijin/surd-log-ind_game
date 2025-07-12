@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths Learning Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Maths Learning Game!</h1>
+        <p>Choose a topic to begin your learning journey.</p>
+        <div class="topics">
+            <a href="{{ url_for('topic_map', topic_name='surds') }}" class="topic-card">
+                <h2>Surds</h2>
+            </a>
+            <a href="{{ url_for('topic_map', topic_name='logarithms') }}" class="topic-card">
+                <h2>Logarithms</h2>
+            </a>
+            <a href="{{ url_for('topic_map', topic_name='indices') }}" class="topic-card">
+                <h2>Indices</h2>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
